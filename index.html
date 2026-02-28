@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Podcast Widget</title>
 <style>
+/* --- Podstawowy pasek --- */
 #spotifyBar {
   position: fixed;
   bottom: 0;
@@ -21,24 +22,24 @@
   z-index: 9999;
 }
 
+/* Lewa sekcja - okładka + info */
 .left {
   display: flex;
   align-items: center;
   gap: 10px;
   width: 30%;
 }
-
 .left img {
   width: 60px;
   height: 60px;
   border-radius: 6px;
 }
 
+/* Środkowa sekcja - przyciski + pasek postępu */
 .center {
   width: 50%;
   text-align: center;
 }
-
 .controls button {
   background: none;
   border: none;
@@ -46,11 +47,9 @@
   font-size: 20px;
   cursor: pointer;
 }
-
 .controls button:hover {
   transform: scale(1.2);
 }
-
 .progress-container {
   width: 100%;
   height: 5px;
@@ -59,7 +58,6 @@
   cursor: pointer;
   border-radius: 5px;
 }
-
 .progress {
   height: 100%;
   width: 0%;
@@ -67,14 +65,36 @@
   border-radius: 5px;
 }
 
+/* Prawa sekcja - głośność */
 .right {
   width: 20%;
   text-align: right;
+}
+
+/* Przycisk udostępniania iframe */
+#shareBtn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 10000;
+  padding: 5px 10px;
+  background: #1db954;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#shareBtn:hover {
+  background: #17a44c;
 }
 </style>
 </head>
 <body>
 
+<!-- Przycisk udostępniania iframe -->
+<button id="shareBtn">Udostępnij widget</button>
+
+<!-- Pasek Spotify-style -->
 <div id="spotifyBar">
   <div class="left">
     <img id="cover" src="assets/mp3/cover.jpg" />
@@ -88,7 +108,6 @@
     <div class="controls">
       <button onclick="togglePlay()" id="playBtn">▶️</button>
     </div>
-
     <div class="progress-container" onclick="setProgress(event)">
       <div class="progress" id="progress"></div>
     </div>
@@ -103,6 +122,7 @@
 <audio id="audio" src="assets/mp3/audio1.mp3"></audio>
 
 <script>
+// --- Player ---
 const audio = document.getElementById("audio");
 const playBtn = document.getElementById("playBtn");
 const progress = document.getElementById("progress");
@@ -134,6 +154,15 @@ function setProgress(e) {
   const duration = audio.duration;
   audio.currentTime = (clickX / width) * duration;
 }
+
+// --- Przycisk Udostępnij iframe ---
+const shareBtn = document.getElementById("shareBtn");
+shareBtn.addEventListener("click", () => {
+  const iframeCode = `<iframe src="https://twojnick.github.io/player/" width="100%" height="120" style="border:none;"></iframe>`;
+  navigator.clipboard.writeText(iframeCode).then(() => {
+    alert("Gotowy kod iframe skopiowany do schowka!");
+  });
+});
 </script>
 
 </body>
