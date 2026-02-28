@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Podcast Widget</title>
+<title>Mój Podcast – Odcinek 1</title>
+
+<!-- Meta tag oEmbed -->
+<link rel="alternate" type="application/json+oembed" 
+      href="https://player.sackydesign.workers.dev/oembed" 
+      title="Mój Podcast – Odcinek 1">
+
 <style>
 /* --- Podstawowy pasek --- */
 #spotifyBar {
@@ -158,7 +164,7 @@ function setProgress(e) {
 // --- Przycisk Udostępnij iframe ---
 const shareBtn = document.getElementById("shareBtn");
 shareBtn.addEventListener("click", () => {
-  const iframeCode = `<iframe src="https://twojnick.github.io/player/" width="100%" height="120" style="border:none;"></iframe>`;
+  const iframeCode = `<iframe src="https://sackuspl.github.io/player/" width="100%" height="120" style="border:none;"></iframe>`;
   navigator.clipboard.writeText(iframeCode).then(() => {
     alert("Gotowy kod iframe skopiowany do schowka!");
   });
